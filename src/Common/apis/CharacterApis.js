@@ -1,5 +1,8 @@
 import axios from 'axios';
 
-export default axios.create({
-    baseUrl: 'https://www.breakingbadapi.com/api/',
-})
+const baseAPI = axios.create({
+
+    baseURL: "https://www.breakingbadapi.com/api"
+});
+
+export default baseAPI;
