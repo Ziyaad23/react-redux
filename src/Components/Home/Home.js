@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import CharacterListing from '../CharacterListing/CharacterListing';
-import baseAPI from '../../Common/apis/characterApis';
+import baseURL from '../../Common/apis/characterApis';
 
 const Home = () => {
 
     useEffect(() => {
         const fetchCharacters = async () => {
-            const response = await baseAPI.get(`/characters`)
+            const response = await baseURL.get(`/characters`)
                 .catch(error => {
                     console.log("Error", error);
                 });
