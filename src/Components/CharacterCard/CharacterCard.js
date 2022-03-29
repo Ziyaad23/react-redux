@@ -1,9 +1,11 @@
 import React from 'react';
 
-const CharacterCard = () => {
+const CharacterCard = (props) => {
+    const { data } = props;
     return (
         <div>
-            Character Card
+            <p>{data.img}</p>
+            <p>{data.name}</p>
         </div>
     );
 };
