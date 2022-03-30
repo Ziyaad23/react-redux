@@ -13,7 +13,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/character/:characterID" element={<CharacterDetail />} />
+          <Route path="/character/:char_id" element={<CharacterDetail />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
         <Footer />

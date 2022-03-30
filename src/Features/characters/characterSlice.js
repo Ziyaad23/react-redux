@@ -7,16 +7,30 @@ export const fetchAsyncCharacters = createAsyncThunk('characters/fetchAsyncChara
     return response.data;
 });
 
+export const fetchAsyncQuotes = createAsyncThunk('characters/fetchAsyncQuotes', async () => {
+    const response = await baseURL
+        .get(`/quotes`)
+    return response.data;
+});
+
+export const fetchAsyncCharactersDetails = createAsyncThunk('characters/fetchAsyncCharactersDetails', async (char_id) => {
+    const response = await baseURL
+        .get(`/characters/${char_id}`)
+    return response.data;
+});
+
 const initialState = {
     characters: [],
+    quotes: [],
+    charactersDetails: [],
 };
 
 const characterSlice = createSlice({
     name: 'characters',
     initialState,
     reducers: {
-        addCharacters: (state, { payload }) => {
-            state.characters = payload;
+        removeCharacterDetails: (state) => {
+            state.charactersDetails = {};
         },
     },
     extraReducers: {
@@ -30,9 +44,19 @@ const characterSlice = createSlice({
         [fetchAsyncCharacters.rejected]: () => {
             console.log("Failed");
         },
+        [fetchAsyncQuotes.fulfilled]: (state, { payload }) => {
+            console.log("Fetched Successfully");
+            return { ...state, quotes: payload };
+        },
+        [fetchAsyncCharactersDetails.fulfilled]: (state, { payload }) => {
+            console.log("Fetched Successfully");
+            return { ...state, charactersDetails: payload };
+        },
     }
 });
 
-export const { addCharacters } = characterSlice.actions;
+export const { removeCharacterDetails } = characterSlice.actions;
 export const getAllCharacters = (state) => state.characters.characters;
+export const getSelectedCharacterQuotes = (state) => state.characters.quotes;
+export const getSelectedCharacterDetails = (state) => state.characters.charactersDetails;
 export default characterSlice.reducer;

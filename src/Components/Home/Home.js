@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import CharacterListing from '../CharacterListing/CharacterListing';
 import { useDispatch } from 'react-redux';
-import { fetchAsyncCharacters } from '../../Features/characters/characterSlice';
+import { fetchAsyncCharacters, fetchAsyncQuotes } from '../../Features/characters/characterSlice';
 
 const Home = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchAsyncCharacters());
+        dispatch(fetchAsyncQuotes());
     }, [dispatch])
 
     return (
