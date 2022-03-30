@@ -20,10 +20,10 @@ const Home = () => {
         fetchCharacters();
     }, [])
     return (
-        <div>
-            Home
+        <section className="mt-28 md:mt-24">
+            <h1 className="text-5xl text-center p-8 font-bold">Characters</h1>
             <CharacterListing />
-        </div>
+        </section>
     );
 };
 

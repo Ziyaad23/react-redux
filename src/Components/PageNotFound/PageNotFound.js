@@ -3,8 +3,7 @@ import ImageNotFound from '../../Images/404.jpg';
 
 const PageNotFound = () => {
     return (
-
-        <div class="bg-indigo-900 relative overflow-hidden h-screen">
+        <section class="bg-indigo-900 relative overflow-hidden h-screen">
             <img src={ImageNotFound} alt="Page Not Found" className="absolute h-full w-full object-cover" />
             <div className="inset-0 bg-black opacity-25 absolute">
             </div>
@@ -18,7 +17,7 @@ const PageNotFound = () => {
                     </p>
                 </div>
             </div>
-        </div>
+        </section>
 
     );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="bg-white w-full py-8">
+        <footer className="bg-white w-full py-8 mx-2.5">
             <div className="max-w-screen-xl mx-auto px-4">
                 <div className="pt-8 flex max-w-xs mx-auto items-center justify-between">
                     <a href="#" className="text-gray-400 hover:text-gray-800 transition-colors duration-200">
