@@ -3,10 +3,10 @@ import React from 'react';
 const CharacterCard = (props) => {
     const { data } = props;
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center hover:scale-105">
             <div className="rounded-lg shadow-lg bg-white">
                 <a href="#">
-                    <img className="rounded-t-lg h-96 md:h-64 w-96 object-cover" src={data.img} alt="characters" />
+                    <img className="rounded-t-lg h-80 w-96 object-cover" src={data.img} alt="characters" />
                 </a>
                 <div className="p-6 ">
                     <h5 className="text-gray-900 text-xl font-medium mb-2">{data.name}</h5>
