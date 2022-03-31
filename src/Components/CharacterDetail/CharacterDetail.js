@@ -28,19 +28,68 @@ const CharacterDetail = () => {
                         <div className="block rounded-lg shadow-lg bg-white">
                             <div className="flex flex-wrap items-center">
                                 <div className="grow-0 shrink-0 basis-auto block lg:flex w-full lg:w-6/12 xl:w-4/12">
-                                    <img src={data[0].img} alt="Trendy Pants and Shoes"
+                                    <img src={data[0].img} alt="character"
                                         className="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg" />
                                 </div>
                                 <div className="grow-0 shrink-0 basis-auto w-full lg:w-6/12 xl:w-8/12">
                                     <div className="px-6 py-12 md:px-12">
-                                        <h2 className="text-3xl font-bold mb-2 text-green-600">{data[0].name}</h2>
-                                        <p className="font-semibold mb-4">{data[0].nickname}</p>
-                                        <p className="text-gray-500 mb-6">
-                                            Occupations
-                                        </p>
-                                        <p className="text-gray-500 mb-6">
-                                            Birthday
-                                        </p>
+                                        {(data[0].name) &&
+                                            <h2 className="text-3xl font-bold mb-2 text-green-600">
+                                                {data[0].name}
+                                            </h2>
+                                        }
+                                        {(data[0].nickname) &&
+                                            <p className="font-semibold mb-4">
+                                                {data[0].nickname}
+                                            </p>
+                                        }
+                                        {data[0].occupation.length > 0 &&
+                                            <p className="text-gray-500 mb-6">
+                                                {data[0].occupation.map((occupation, index) => {
+                                                    return (
+                                                        <span key={index}>{occupation}</span>
+                                                    )
+                                                })}
+                                            </p>
+                                        }
+                                        {(data[0].birthday) &&
+                                            <p className="font-semibold mb-4">
+                                                {data[0].birthday}
+                                            </p>
+                                        }
+                                        {(data[0].status) &&
+                                            <p className="font-semibold mb-4">
+                                                {data[0].status}
+                                            </p>
+                                        }
+                                        {(data[0].portrayed) &&
+                                            <p className="font-semibold mb-4">
+                                                {data[0].portrayed}
+                                            </p>
+                                        }
+                                        {(data[0].category) &&
+                                            <p className="font-semibold mb-4">
+                                                {data[0].category}
+                                            </p>
+                                        }
+                                        {data[0].appearance.length > 0 &&
+                                            <p className="text-gray-500 mb-6">
+                                                {data[0].appearance.map((appearance, index) => {
+                                                    return (
+                                                        <span key={index}>{appearance}</span>
+                                                    )
+                                                })}
+                                            </p>
+                                        }
+                                        {data[0].better_call_saul_appearance.length > 0 &&
+                                            <p className="text-gray-500 mb-6">
+                                                {data[0].better_call_saul_appearance.map((better_call_saul_appearance, index) => {
+                                                    return (
+                                                        <span key={index}>{better_call_saul_appearance}</span>
+                                                    )
+                                                })}
+                                            </p>
+                                        }
                                         <button type="button" className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Random Quotes From Character</button>
                                     </div>
                                 </div>
