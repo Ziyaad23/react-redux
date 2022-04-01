@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { getAllCharacters } from '../../Features/characters/characterSlice';
 import CharacterCard from '../CharacterCard/CharacterCard';
@@ -14,10 +14,6 @@ const CharacterListing = () => {
         ) : (
             <div>...Loading</div>
         );
-    useEffect(() => {
-        console.log(characters);
-        console.log("cas", characters.length);
-    })
 
     return (
         <div className="grid grid-cols- gap-4 md:grid-cols-5 md:px-10">
