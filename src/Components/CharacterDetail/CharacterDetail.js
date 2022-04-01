@@ -12,6 +12,16 @@ const CharacterDetail = () => {
     const [randomQuote, setRandomQuote] = useState('No quotes Found');
     const [characterName, setCharacterName] = useState('');
 
+    const [quote, setQuote] = useState("");
+    const [quotes, setQuotes] = useState([]);
+
+    useEffect(() => {
+        if (localStorage.getItem(char_id)) {
+            const storedList = JSON.parse(localStorage.getItem(char_id));
+            setQuotes(storedList);
+        }
+    }, [])
+
     useEffect(() => {
         dispatch(fetchAsyncCharactersDetails(char_id));
         return () => {
@@ -51,13 +61,17 @@ const CharacterDetail = () => {
         }
     }
 
-    function handleQuote(e) {
-        e.preventDefault();
-        console.log("Handle Quote");
-    }
+    const addQuote = (e) => {
+        if (quote) {
+            const newTask = { id: new Date().getTime().toString(), title: quote };
+            setQuotes([...quotes, newTask]);
+            localStorage.setItem(char_id, JSON.stringify([...quotes, newTask]));
+            setQuote("");
+        }
+    };
 
     return (
-        <section className="container my-24 px-6 mx-auto">
+        <section className="container my-28 px-6 mx-auto">
             {Object.keys(data).length === 0 ? (
                 <div>...Loading</div>
             ) : (
@@ -135,16 +149,23 @@ const CharacterDetail = () => {
                                             </p>
                                         }
                                         <button type="button" onClick={handleClick} className="focus:outline-none text-white bg-green-700 hover:bg-green-80 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Click For Random Quotes From {data[0].name}</button>
+                                        {quotes.map((quote) => (
+                                            <React.Fragment key={quote.id}>
+                                                <p> {quote.title} </p>
+                                            </React.Fragment>
+                                        ))}
                                         <div>
                                             <div className="mb-3 xl:w-96">
                                                 <textarea
                                                     className="form-control max-h-24 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none"
                                                     rows="3"
-                                                    maxlength="100"
+                                                    maxLength="100"
                                                     placeholder="Enter a quote for this character"
+                                                    onChange={(e) => setQuote(e.target.value)}
+                                                    value={quote}
                                                 ></textarea>
                                             </div>
-                                            <button type="button" onClick={handleQuote} className="focus:outline-none text-white bg-green-700 hover:bg-green-80 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Submit Quote</button>
+                                            <button type="button" onClick={addQuote} className="focus:outline-none text-white bg-green-700 hover:bg-green-80 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Submit Quote</button>
                                         </div>
                                     </div>
                                 </div>
