@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getAllCharacters } from '../../Features/characters/characterSlice';
 import CharacterCard from '../CharacterCard/CharacterCard';
@@ -6,9 +6,18 @@ import CharacterCard from '../CharacterCard/CharacterCard';
 const CharacterListing = () => {
     const characters = useSelector(getAllCharacters);
 
-    const renderCharacters = characters.map((character, index) => {
-        return <CharacterCard key={index} data={character} />;
-    });
+    const renderCharacters =
+        characters.length > 0 ? (
+            characters.map((character, index) => (
+                <CharacterCard key={index} data={character} />
+            ))
+        ) : (
+            <div>...Loading</div>
+        );
+    useEffect(() => {
+        console.log(characters);
+        console.log("cas", characters.length);
+    })
 
     return (
         <div className="grid grid-cols- gap-4 md:grid-cols-5 md:px-10">
