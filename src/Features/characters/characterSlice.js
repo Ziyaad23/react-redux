@@ -7,9 +7,9 @@ export const fetchAsyncCharacters = createAsyncThunk('characters/fetchAsyncChara
     return response.data;
 });
 
-export const fetchAsyncQuotes = createAsyncThunk('characters/fetchAsyncQuotes', async () => {
+export const fetchAsyncQuotes = createAsyncThunk('characters/fetchAsyncQuotes', async (char_name) => {
     const response = await baseURL
-        .get(`/quotes`)
+        .get(`/quote/random?author=${char_name}`)
     return response.data;
 });
 

@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAsyncCharactersDetails, getSelectedCharacterDetails, removeCharacterDetails } from '../../Features/characters/characterSlice';
+import { fetchAsyncCharactersDetails, getSelectedCharacterDetails, removeCharacterDetails, fetchAsyncQuotes, getSelectedCharacterQuotes } from '../../Features/characters/characterSlice';
 
 const CharacterDetail = () => {
 
     const { char_id } = useParams();
     const dispatch = useDispatch();
     const data = useSelector(getSelectedCharacterDetails);
-    console.log(data);
+    const dataQuotes = useSelector(getSelectedCharacterQuotes);
+    const [randomQuote, setRandomQuote] = useState('No quotes Found');
+    const [characterName, setCharacterName] = useState('');
 
     useEffect(() => {
         dispatch(fetchAsyncCharactersDetails(char_id));
@@ -16,6 +18,41 @@ const CharacterDetail = () => {
             dispatch(removeCharacterDetails());
         }
     }, [dispatch, char_id])
+
+    useEffect(() => {
+        if (Object.keys(data).length === 0) {
+            return
+        }
+        else {
+            let cName = data[0].name;
+            cName = cName.replace(/ /g, '+');
+            setCharacterName(cName);
+            dispatch(fetchAsyncQuotes(cName));
+        }
+    }, [dispatch, data])
+
+    useEffect(() => {
+        if (Object.keys(dataQuotes).length === 0) {
+            return
+        }
+        else {
+            {
+                Object.keys(dataQuotes).length === 0 ? (
+                    setRandomQuote('No quotes found')
+                ) : (setRandomQuote(dataQuotes[0].quote));
+            }
+        }
+    }, [dispatch, dataQuotes])
+
+    function handleClick(e) {
+        e.preventDefault();
+        dispatch(fetchAsyncQuotes(characterName));
+        {
+            Object.keys(dataQuotes).length === 0 ? (
+                setRandomQuote('No quotes found')
+            ) : (setRandomQuote(dataQuotes[0].quote));
+        }
+    }
 
     return (
         <section className="container my-24 px-6 mx-auto">
@@ -90,7 +127,12 @@ const CharacterDetail = () => {
                                                 })}
                                             </p>
                                         }
-                                        <button type="button" className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Random Quotes From Character</button>
+                                        {{ randomQuote } &&
+                                            <p className="font-semibold mb-4">
+                                                {randomQuote}
+                                            </p>
+                                        }
+                                        <button type="button" onClick={handleClick} className="focus:outline-none text-white bg-green-700 hover:bg-green-80 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Click For Random Quotes From {data[0].name}</button>
                                     </div>
                                 </div>
                             </div>
