@@ -33,14 +33,11 @@ const CharacterDetail = () => {
 
     useEffect(() => {
         if (Object.keys(dataQuotes).length === 0) {
+            setRandomQuote('No quotes found');
             return
         }
         else {
-            {
-                Object.keys(dataQuotes).length === 0 ? (
-                    setRandomQuote('No quotes found')
-                ) : (setRandomQuote(dataQuotes[0].quote));
-            }
+            setRandomQuote(dataQuotes[0].quote);
         }
     }, [dispatch, dataQuotes])
 
@@ -54,13 +51,18 @@ const CharacterDetail = () => {
         }
     }
 
+    function handleQuote(e) {
+        e.preventDefault();
+        console.log("Handle Quote");
+    }
+
     return (
         <section className="container my-24 px-6 mx-auto">
             {Object.keys(data).length === 0 ? (
                 <div>...Loading</div>
             ) : (
                 <>
-                    <div className="mb-32 text-gray-800 text-center md:text-left">
+                    <div className="mb-20 text-gray-800 text-center md:text-left">
 
                         <div className="block rounded-lg shadow-lg bg-white">
                             <div className="flex flex-wrap items-center">
@@ -69,7 +71,7 @@ const CharacterDetail = () => {
                                         className="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg" />
                                 </div>
                                 <div className="grow-0 shrink-0 basis-auto w-full lg:w-6/12 xl:w-8/12">
-                                    <div className="px-6 py-12 md:px-12">
+                                    <div className="px-6 py-12 md:px-8">
                                         {(data[0].name) &&
                                             <h2 className="text-3xl font-bold mb-2 text-green-600">
                                                 {data[0].name}
@@ -133,6 +135,16 @@ const CharacterDetail = () => {
                                             </p>
                                         }
                                         <button type="button" onClick={handleClick} className="focus:outline-none text-white bg-green-700 hover:bg-green-80 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Click For Random Quotes From {data[0].name}</button>
+                                        <div>
+                                            <div className="mb-3 xl:w-96">
+                                                <textarea
+                                                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none"
+                                                    rows="3"
+                                                    placeholder="Enter a quote for this character"
+                                                ></textarea>
+                                            </div>
+                                            <button type="button" onClick={handleQuote} className="focus:outline-none text-white bg-green-700 hover:bg-green-80 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Submit Quote</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
