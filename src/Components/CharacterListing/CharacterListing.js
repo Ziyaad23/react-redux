@@ -12,7 +12,7 @@ const CharacterListing = () => {
                 <CharacterCard key={index} data={character} />
             ))
         ) : (
-            <div>...Loading</div>
+            <div>Loading Characters</div>
         );
 
     return (

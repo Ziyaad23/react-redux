@@ -7,6 +7,12 @@ export const fetchAsyncCharacters = createAsyncThunk('characters/fetchAsyncChara
     return response.data;
 });
 
+export const fetchAsyncDeath = createAsyncThunk('characters/fetchAsyncDeath', async () => {
+    const response = await baseURL
+        .get(`/random-death`)
+    return response.data;
+});
+
 export const fetchAsyncQuotes = createAsyncThunk('characters/fetchAsyncQuotes', async (char_name) => {
     const response = await baseURL
         .get(`/quote/random?author=${char_name}`)
@@ -23,6 +29,7 @@ const initialState = {
     characters: [],
     quotes: [],
     charactersDetails: [],
+    death: [],
 };
 
 const characterSlice = createSlice({
@@ -52,11 +59,16 @@ const characterSlice = createSlice({
             console.log("Fetched Successfully");
             return { ...state, charactersDetails: payload };
         },
+        [fetchAsyncDeath.fulfilled]: (state, { payload }) => {
+            console.log("Fetched Successfully");
+            return { ...state, death: payload };
+        },
     }
 });
 
 export const { removeCharacterDetails } = characterSlice.actions;
 export const getAllCharacters = (state) => state.characters.characters;
+export const getSelectedCharacterDeath = (state) => state.characters.death;
 export const getSelectedCharacterQuotes = (state) => state.characters.quotes;
 export const getSelectedCharacterDetails = (state) => state.characters.charactersDetails;
 export default characterSlice.reducer;

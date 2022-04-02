@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import CharacterListing from '../CharacterListing/CharacterListing';
 import { useDispatch } from 'react-redux';
-import { fetchAsyncCharacters, fetchAsyncQuotes } from '../../Features/characters/characterSlice';
+import { fetchAsyncCharacters } from '../../Features/characters/characterSlice';
 
 const Home = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchAsyncCharacters());
-        dispatch(fetchAsyncQuotes());
     }, [dispatch])
 
     return (
-        <section className="mt-28 md:mt-24">
+        <section className="my-28 px-6 mx-auto md:h-screen">
             <h1 className="text-5xl text-center p-8 font-bold">Characters</h1>
             <CharacterListing />
         </section>

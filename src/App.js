@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
 import CharacterDetail from './Components/CharacterDetail/CharacterDetail';
+import DeathGenerator from './Components/DeathGenerator/DeathGenerator';
 import PageNotFound from './Components/PageNotFound/PageNotFound';
 import Footer from './Components/Footer/Footer';
 
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/character/:char_id" element={<CharacterDetail />} />
+          <Route path="/death_generator" element={<DeathGenerator />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
         <Footer />
