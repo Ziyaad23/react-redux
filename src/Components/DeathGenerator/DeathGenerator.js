@@ -20,7 +20,7 @@ const DeathGenerator = () => {
                 <div>...Loading</div>
             ) : (
                 <>
-                    <h1 className="text-5xl text-center p-8 font-bold">Death Generator</h1>
+                    <h1 className="text-5xl text-center p-6 font-bold">Death Generator</h1>
                     <div className="flex justify-center">
                         <div className="rounded-lg shadow-lg bg-white w-96">
                             <div>

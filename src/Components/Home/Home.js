@@ -11,8 +11,8 @@ const Home = () => {
     }, [dispatch])
 
     return (
-        <section className="my-28 px-6 mx-auto md:h-screen">
-            <h1 className="text-5xl text-center p-8 font-bold">Characters</h1>
+        <section className="my-28 px-6 mx-auto h-full">
+            <h1 className="text-5xl text-center p-6 font-bold">Characters</h1>
             <CharacterListing />
         </section>
     );
