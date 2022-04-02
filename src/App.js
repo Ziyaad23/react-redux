@@ -18,7 +18,7 @@ function App() {
           <Route path="/death_generator" element={<DeathGenerator />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </div>
   );
