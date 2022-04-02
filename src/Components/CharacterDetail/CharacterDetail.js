@@ -170,7 +170,7 @@ const CharacterDetail = () => {
                                                             <td className="w-2/4 text-left flex">
                                                                 {data[0].appearance.map((appearance, index) => {
                                                                     return (
-                                                                        <span key={index}>{appearance}&nbsp;</span>
+                                                                        <span key={index}>S{appearance}&nbsp;</span>
                                                                     )
                                                                 })}
                                                             </td>
@@ -186,7 +186,7 @@ const CharacterDetail = () => {
                                                             <td className="w-2/4 text-left flex">
                                                                 {data[0].better_call_saul_appearance.map((better_call_saul_appearance, index) => {
                                                                     return (
-                                                                        <span key={index}>{better_call_saul_appearance}&nbsp;</span>
+                                                                        <span key={index}>S{better_call_saul_appearance}&nbsp;</span>
                                                                     )
                                                                 })}
                                                             </td>
