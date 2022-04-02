@@ -16,7 +16,7 @@ const CharacterListing = () => {
         );
 
     return (
-        <div className="grid grid-cols- gap-4 md:grid-cols-5 md:px-10 md:gap-y-8">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-5 md:px-10 md:gap-y-8">
             {renderCharacters}
         </div>
     );
