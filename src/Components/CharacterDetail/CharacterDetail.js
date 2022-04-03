@@ -70,11 +70,10 @@ const CharacterDetail = () => {
         e.preventDefault();
         // Fetch another quote for user from API
         dispatch(fetchAsyncQuotes(characterName));
-        {
-            Object.keys(dataQuotes).length === 0 ? (
-                setRandomQuote('No quotes found')
-            ) : (setRandomQuote(dataQuotes[0].quote));
-        }
+        // Set quote on click
+        Object.keys(dataQuotes).length === 0 ? (
+            setRandomQuote('No quotes found')
+        ) : (setRandomQuote(dataQuotes[0].quote));
     }
 
     const addQuote = (e) => {
