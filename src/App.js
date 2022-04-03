@@ -5,7 +5,6 @@ import Header from './Components/Header/Header';
 import CharacterDetail from './Components/CharacterDetail/CharacterDetail';
 import DeathGenerator from './Components/DeathGenerator/DeathGenerator';
 import PageNotFound from './Components/PageNotFound/PageNotFound';
-import Footer from './Components/Footer/Footer';
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
           <Route path="/death_generator" element={<DeathGenerator />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
-        {/* <Footer /> */}
       </Router>
     </div>
   );

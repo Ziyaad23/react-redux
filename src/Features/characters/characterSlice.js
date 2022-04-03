@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import baseURL from '../../Common/apis/characterApis';
 
-export const fetchAsyncCharacters = createAsyncThunk('characters/fetchAsyncCharacters', async () => {
+export const fetchAsyncCharacters = createAsyncThunk('characters/fetchAsyncCharacters', async (char_limit) => {
     const response = await baseURL
-        .get(`/characters`)
+        .get(`/characters?limit=${char_limit}`)
     return response.data;
 });
 

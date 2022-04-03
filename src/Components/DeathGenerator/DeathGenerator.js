@@ -31,7 +31,7 @@ const DeathGenerator = () => {
                     <div className="flex justify-center max-w-5xl m-auto items-center flex-col">
                         <div className="rounded-lg shadow-lg bg-white w-96 md:flex md:w-9/12">
                             <div className="md:w-4/12">
-                                <img className="rounded-t-lg h-full md:h-80 w-full object-cover" src={data.img} alt="characters" />
+                                <img className="rounded-t-lg h-30rem md:h-80 w-full object-cover" src={data.img} alt="characters" />
                             </div>
                             <div className="p-6 md:w-8/12">
                                 {(data.death) &&
