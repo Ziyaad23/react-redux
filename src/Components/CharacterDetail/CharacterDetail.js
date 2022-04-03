@@ -7,33 +7,46 @@ const CharacterDetail = () => {
 
     const { char_id } = useParams();
     const dispatch = useDispatch();
+
+    // Store selected character informations in variable data
     const data = useSelector(getSelectedCharacterDetails);
+    // Store selected character quotes in variable dataQuotes
     const dataQuotes = useSelector(getSelectedCharacterQuotes);
+
+    // Random Quotes
     const [randomQuote, setRandomQuote] = useState('No quotes Found');
+    // Store character name to be fetch quotes
     const [characterName, setCharacterName] = useState('');
 
+    // Store quotes for character
     const [quote, setQuote] = useState("");
+    // Store quotes in local storage for character
     const [quotes, setQuotes] = useState([]);
 
     useEffect(() => {
+        // Fetch quotes for selected character in local storage
         if (localStorage.getItem(char_id)) {
             const storedList = JSON.parse(localStorage.getItem(char_id));
             setQuotes(storedList);
         }
-    }, [])
+    }, [char_id])
 
     useEffect(() => {
+        // Fetch character details for character
         dispatch(fetchAsyncCharactersDetails(char_id));
         return () => {
+            // Remove previous character details on page load
             dispatch(removeCharacterDetails());
         }
     }, [dispatch, char_id])
 
     useEffect(() => {
+        // Check if data is null
         if (Object.keys(data).length === 0) {
             return
         }
         else {
+            // If data not null, then proceed to make api call to fetch quote for character from API
             let cName = data[0].name;
             cName = cName.replace(/ /g, '+');
             setCharacterName(cName);
@@ -42,17 +55,20 @@ const CharacterDetail = () => {
     }, [dispatch, data])
 
     useEffect(() => {
+        // Check if dataQuotes is null
         if (Object.keys(dataQuotes).length === 0) {
             setRandomQuote('No quotes found');
             return
         }
         else {
+            // Set random quotes for user
             setRandomQuote(dataQuotes[0].quote);
         }
     }, [dispatch, dataQuotes])
 
     function handleClick(e) {
         e.preventDefault();
+        // Fetch another quote for user from API
         dispatch(fetchAsyncQuotes(characterName));
         {
             Object.keys(dataQuotes).length === 0 ? (
@@ -62,6 +78,7 @@ const CharacterDetail = () => {
     }
 
     const addQuote = (e) => {
+        // Add new quote for character and store in local storage
         if (quote) {
             const newTask = { id: new Date().getTime().toString(), title: quote };
             setQuotes([...quotes, newTask]);
@@ -95,102 +112,118 @@ const CharacterDetail = () => {
                                                 {data[0].name}
                                             </h2>
                                         }
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                             {(data[0].nickname) &&
                                                 <div className="flex">
                                                     <table className="w-full">
-                                                        <tr>
-                                                            <td className="w-2/4 text-left"><strong>Nickname:</strong></td>
-                                                            <td className="w-2/4 text-left">{data[0].nickname}</td>
-                                                        </tr>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td className="w-2/4 text-left"><strong>Nickname:</strong></td>
+                                                                <td className="w-2/4 text-left">{data[0].nickname}</td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             }
                                             {(data[0].portrayed) &&
                                                 <div className="flex">
                                                     <table className="w-full">
-                                                        <tr>
-                                                            <td className="w-2/4 text-left"><strong>Portrayed:</strong></td>
-                                                            <td className="w-2/4 text-left">{data[0].portrayed}</td>
-                                                        </tr>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td className="w-2/4 text-left"><strong>Portrayed:</strong></td>
+                                                                <td className="w-2/4 text-left">{data[0].portrayed}</td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             }
                                             {(data[0].category) &&
                                                 <div className="flex">
                                                     <table className="w-full">
-                                                        <tr>
-                                                            <td className="w-2/4 text-left"><strong>Category:</strong></td>
-                                                            <td className="w-2/4 text-left">{data[0].category}</td>
-                                                        </tr>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td className="w-2/4 text-left"><strong>Category:</strong></td>
+                                                                <td className="w-2/4 text-left">{data[0].category}</td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             }
                                             {(data[0].birthday) &&
                                                 <div className="flex">
                                                     <table className="w-full">
-                                                        <tr>
-                                                            <td className="w-2/4 text-left"><strong>Date of Birth:</strong></td>
-                                                            <td className="w-2/4 text-left">{data[0].birthday}</td>
-                                                        </tr>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td className="w-2/4 text-left"><strong>Date of Birth:</strong></td>
+                                                                <td className="w-2/4 text-left">{data[0].birthday}</td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             }
                                             {(data[0].status) &&
                                                 <div className="flex">
                                                     <table className="w-full">
-                                                        <tr>
-                                                            <td className="w-2/4 text-left"><strong>Status:</strong></td>
-                                                            <td className="w-2/4 text-left">{data[0].status}</td>
-                                                        </tr>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td className="w-2/4 text-left"><strong>Status:</strong></td>
+                                                                <td className="w-2/4 text-left">{data[0].status}</td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             }
                                             {data[0].occupation.length > 0 &&
                                                 <div className="flex">
                                                     <table className="w-full">
-                                                        <tr>
-                                                            <td className="w-2/4 text-left"><strong>Occupations:</strong></td>
-                                                            <td className="w-2/4 text-left">
-                                                                {data[0].occupation.map((occupation, index) => {
-                                                                    return (
-                                                                        <span key={index}><li>{occupation}</li></span>
-                                                                    )
-                                                                })}
-                                                            </td>
-                                                        </tr>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td className="w-2/4 text-left"><strong>Occupations:</strong></td>
+                                                                <td className="w-2/4 text-left">
+                                                                    {data[0].occupation.map((occupation, index) => {
+                                                                        return (
+                                                                            <span key={index}><li>{occupation}</li></span>
+                                                                        )
+                                                                    })}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             }
                                             {data[0].appearance.length > 0 &&
                                                 <div className="flex">
                                                     <table className="w-full">
-                                                        <tr>
-                                                            <td className="w-2/4 text-left"><strong>Breaking Bad Appearances:</strong></td>
-                                                            <td className="w-2/4 text-left flex">
-                                                                {data[0].appearance.map((appearance, index) => {
-                                                                    return (
-                                                                        <span key={index}>S{appearance}&nbsp;</span>
-                                                                    )
-                                                                })}
-                                                            </td>
-                                                        </tr>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td className="w-2/4 text-left"><strong>Breaking Bad Appearances:</strong></td>
+                                                                <td className="w-2/4 text-left flex">
+                                                                    {data[0].appearance.map((appearance, index) => {
+                                                                        return (
+                                                                            <span key={index}>S{appearance}&nbsp;</span>
+                                                                        )
+                                                                    })}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             }
                                             {data[0].better_call_saul_appearance.length > 0 &&
                                                 <div className="flex">
                                                     <table className="w-full">
-                                                        <tr>
-                                                            <td className="w-2/4 text-left"><strong>Better Call Saul Appearance:</strong></td>
-                                                            <td className="w-2/4 text-left flex">
-                                                                {data[0].better_call_saul_appearance.map((better_call_saul_appearance, index) => {
-                                                                    return (
-                                                                        <span key={index}>S{better_call_saul_appearance}&nbsp;</span>
-                                                                    )
-                                                                })}
-                                                            </td>
-                                                        </tr>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td className="w-2/4 text-left"><strong>Better Call Saul Appearance:</strong></td>
+                                                                <td className="w-2/4 text-left flex">
+                                                                    {data[0].better_call_saul_appearance.map((better_call_saul_appearance, index) => {
+                                                                        return (
+                                                                            <span key={index}>S{better_call_saul_appearance}&nbsp;</span>
+                                                                        )
+                                                                    })}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             }

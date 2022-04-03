@@ -6,6 +6,7 @@ import CharacterCard from '../CharacterCard/CharacterCard';
 const CharacterListing = () => {
     const characters = useSelector(getAllCharacters);
 
+    //Display characters in a card
     const renderCharacters =
         characters.length > 0 ? (
             <div className="grid grid-cols-1 gap-4 md:grid-cols-5 md:px-10 md:gap-y-8">

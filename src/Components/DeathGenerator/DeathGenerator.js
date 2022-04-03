@@ -5,13 +5,16 @@ import { fetchAsyncDeath, getSelectedCharacterDeath } from '../../Features/chara
 const DeathGenerator = () => {
 
     const dispatch = useDispatch();
+    //Store death generator informations in variable data
     const data = useSelector(getSelectedCharacterDeath);
 
     useEffect(() => {
+        //Fetch Death generator data
         dispatch(fetchAsyncDeath());
     }, [dispatch])
 
     function handleClick(e) {
+        //Fetch Death generator data on click
         e.preventDefault();
         dispatch(fetchAsyncDeath());
     }
