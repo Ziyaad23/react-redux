@@ -12,7 +12,7 @@ const CharacterListing = () => {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-5 md:px-10 md:gap-y-8">
                 {characters.map((character, index) => {
                     return <CharacterCard key={index} data={character} />;
-                })};
+                })}
             </div>
         ) : (
             <div className="flex justify-center">
